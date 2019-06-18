@@ -43,7 +43,7 @@ const another = new Circle(1);
 console.log(another.draw());
 
 /*Note-1: Primitives are copied by their value*/
-/*Note-2: Objects are copied be their reference */
+/*Note-2: Objects are copied by their reference */
 
 // Adding/Removing Properties //
 function aCircle(radius) {
