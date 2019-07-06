@@ -1,4 +1,5 @@
 /*========= Classes =========== */
+/* Classes are nothing but blue print to create object. */
 // prototype based class
 function User(name) {
   this.name = name;
@@ -10,7 +11,7 @@ User.prototype.sayHi = function() {
 
 let user = new User("Jhon");
 user.sayHi();
-console.log(user);
+console.log(user); //Jhon
 
 // constructor based class
 class User1 {
@@ -116,7 +117,7 @@ console.log(square1.numOfRequestsForArea);
 console.log(Square.equals(square1, square2));
 console.log(Square.isValidDimensions(6, 6));
 
-/*========= Classes: Inheritance========= */
+/*======Classes: Inheritance / SubClasses ======= */
 class Person {
   constructor(_name, _age) {
     this.name = _name;
@@ -169,7 +170,7 @@ class Animal {
   }
 
   makeSound() {
-    console.log("Generic Animal Sound");
+    console.log(`${this.name} generating Animal Sound`);
   }
 }
 
@@ -179,15 +180,15 @@ class Dog extends Animal {
   }
 
   makeSound() {
-    console.log("Roof! Roof!");
+    console.log(`${this.name} generating Roof! Roof!`);
   }
 }
 
 const a1 = new Animal("Don");
 const a2 = new Dog("Jeff");
 
-a1.makeSound();
-a2.makeSound();
+a1.makeSound(); // Generic Animal Sound
+a2.makeSound(); // Roof! Roof!
 
 /*========= Classes: HTML list building========= */
 class ListBinding {
@@ -227,3 +228,49 @@ class ListBinding {
     this.update();
   }
 }
+
+// Static Method in Classes //
+class Car {
+  constructor(color, price) {
+    Object.assign(this, { color, price });
+  }
+  static comparePrise(car1, car2) {
+    return Math.abs(car1.price - car2.price);
+  }
+  getColor() {
+    return this.color;
+  }
+}
+/* Static method doesn't use 'this' inside it */
+/* Static method directly call the class */
+
+const redCar = new Car("red", 2000);
+const blueCar = new Car("blue", 1500);
+//console.dir(Car.getColor)
+console.log(redCar.getColor()); //red
+console.log(Car.comparePrise(redCar, blueCar)); //500
+
+// Static method inside a sub-class //
+// base class
+class bigCar {
+  constructor(price) {
+    this.price = price;
+  }
+  static sellCar(myCar) {
+    return `selling for ${myCar.price}`;
+  }
+}
+
+// sub class
+class Toyota extends bigCar {
+  constructor(price) {
+    super(price);
+  }
+  static newCar(oldCar) {
+    return `Toyota ${super.sellCar(oldCar)}`;
+  }
+}
+
+const bikroy = new Toyota(3000);
+//console.log(mitsubishi.newcar)
+console.log(Toyota.newCar(bikroy));
